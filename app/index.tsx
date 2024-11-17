@@ -1,16 +1,37 @@
 import Categories from "@/components/Categories";
 import FeaturedRow from "@/components/FeaturedRow";
+import { sanityClient } from "@/sanity";
 import { useNavigation } from "expo-router";
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
 import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon, AdjustmentsHorizontalIcon } from "react-native-heroicons/outline"
 
 const HomeScren = () => {
     const navigation = useNavigation()
+    const [featuredCategories, setFeaturedCategories] = useState([])
 
     useLayoutEffect(() => {
         navigation.setOptions({ headerShown: false });
     }, [navigation])
+
+    useEffect(() => {
+        getAllfeatured()
+        console.log(featuredCategories)
+    }, [])
+
+    const getAllfeatured = async () => {
+        sanityClient.fetch(`* [_type == "featured"] {
+            ...,
+            restaurants[] -> {
+                ...,
+                dishes[]->
+            }
+        }`).then(data => setFeaturedCategories(data))
+
+
+
+    }
+
     return (<>
         <SafeAreaView className="bg-white pt-5">
             {/* Header */}
@@ -50,10 +71,13 @@ const HomeScren = () => {
 
                 {/* featured  Rows*/}
 
-                <FeaturedRow id="123" title="Featured" description="Paid placements from our partners" featuredCategory="featured" />
-                <FeaturedRow id="1234" title="Tasty Discounts" description="Everyone's been enjoying these juicy discounts!" featuredCategory="featured" />
-                <FeaturedRow id="12345" title="Offers near you!" description="Why not support your local restaourant tonigth " featuredCategory="featured" />
-
+                {
+                    featuredCategories && featuredCategories.map((featuredCategory) => {
+                        return  <FeaturedRow id="123" title={`${featuredCategory[0]}`} description="Paid placements from our partners" featuredCategory="featured" />
+                    })
+                }
+               
+                
             </ScrollView>
 
 
