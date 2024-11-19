@@ -1,7 +1,9 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRightIcon, StarIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
+import { sanityClientVerify } from '@/sanity'
+import { FeaturedTpe, RestaurantType } from '@/types/FeaturedTypes'
 
 interface FeaturedRowProps {
     id: string
@@ -12,6 +14,24 @@ interface FeaturedRowProps {
 }
 
 const FeaturedRow: React.FC<FeaturedRowProps> = ({ id, title, description, featuredCategory }) => {
+    const [restaurantValues, setRestaurantValues] = useState<RestaurantType[]>([])
+    useEffect(() => {
+        sanityClientVerify.fetch(`*[_type == 'featured' && _id == $id] {
+  ...,
+  restaurants[] -> {
+    ...,
+    dishes[]->,
+      type->{
+        name
+      }
+  },
+}[0]
+      `, { id }).then((res: FeaturedTpe) => {
+        console.log("Verificando o valor da imagem",res)
+            setRestaurantValues(res?.restaurants)
+        }).catch((err) => console.log(err))
+
+    }, [])
     return (
         <View>
             <View className='mt-4 flex-row items-center justify-between px-4'>
@@ -30,44 +50,22 @@ const FeaturedRow: React.FC<FeaturedRowProps> = ({ id, title, description, featu
                 className='pt-4'
             >
                 {/* Restaurant Cart */}
-                <RestaurantCard
-                    id="123"
-                    imgUrl="https://links.papareact.com/gn7"
-                    title="Yo! Sushi"
-                    rating={4.5}
-                    genre="123 Man St"
-                    address="string"
-                    short_description="this is a test description"
-                    dish={[]}
-                    long={20}
-                    lat={0}
-                />
+                {restaurantValues && restaurantValues.map((restaurantValue) => {
+                    return <RestaurantCard
+                        id={restaurantValue._id}
+                        imgUrl={restaurantValue.image.asset._ref}
+                        title={restaurantValue.name}
+                        rating={restaurantValue.rating}
+                        genre="123 Man St"
+                        address={restaurantValue.address}
+                        short_description={restaurantValue.short_description}
+                        dish={restaurantValue.dishes}
+                        long={restaurantValue.long}
+                        lat={restaurantValue.lat}
+                    />
+                })}
 
-                <RestaurantCard
-                    id="123"
-                    imgUrl="https://links.papareact.com/gn7"
-                    title="Yo! Sushi"
-                    rating={4.5}
-                    genre="123 Man St"
-                    address="string"
-                    short_description="this is a test description"
-                    dish={[]}
-                    long={20}
-                    lat={0}
-                />
 
-                <RestaurantCard
-                    id="123"
-                    imgUrl="https://links.papareact.com/gn7"
-                    title="Yo! Sushi"
-                    rating={4.5}
-                    genre="123 Man St"
-                    address="string"
-                    short_description="this is a test description"
-                    dish={[]}
-                    long={20}
-                    lat={0}
-                />
 
 
 

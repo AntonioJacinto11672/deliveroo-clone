@@ -1,6 +1,7 @@
 import Categories from "@/components/Categories";
 import FeaturedRow from "@/components/FeaturedRow";
-import { sanityClient } from "@/sanity";
+import { sanityClientVerify } from "@/sanity";
+import { FeaturedTpe } from "@/types/FeaturedTypes";
 import { useNavigation } from "expo-router";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Image, SafeAreaView, ScrollView, Text, TextInput, View } from "react-native";
@@ -8,7 +9,7 @@ import { ChevronDownIcon, UserIcon, MagnifyingGlassIcon, AdjustmentsVerticalIcon
 
 const HomeScren = () => {
     const navigation = useNavigation()
-    const [featuredCategories, setFeaturedCategories] = useState([])
+    const [featuredCategories, setFeaturedCategories] = useState<FeaturedTpe[]>([])
 
     useLayoutEffect(() => {
         navigation.setOptions({ headerShown: false });
@@ -16,20 +17,21 @@ const HomeScren = () => {
 
     useEffect(() => {
         getAllfeatured()
-        console.log(featuredCategories)
+        //console.log(featuredCategories)
     }, [])
 
     const getAllfeatured = async () => {
-        sanityClient.fetch(`* [_type == "featured"] {
-            ...,
-            restaurants[] -> {
+        sanityClientVerify.fetch(`*[_type == 'featured'] {
                 ...,
-                dishes[]->
-            }
-        }`).then(data => setFeaturedCategories(data))
-
-
-
+                restaurants[] -> {
+                    ...,
+                    dishes[]->
+                }
+            }`)
+            .then(data => {
+                //console.log("Testando claudio", data[0].name)
+                setFeaturedCategories(data)
+            })
     }
 
     return (<>
@@ -72,12 +74,13 @@ const HomeScren = () => {
                 {/* featured  Rows*/}
 
                 {
-                    featuredCategories && featuredCategories.map((featuredCategory) => {
-                        return  <FeaturedRow id="123" title={`${featuredCategory[0]}`} description="Paid placements from our partners" featuredCategory="featured" />
+                    featuredCategories && featuredCategories.map((featuredCategory: FeaturedTpe) => {
+                        console.log("No Server", featuredCategory.name)
+                        return <FeaturedRow id={featuredCategory._id} title={`${featuredCategory.name}`} description={featuredCategory.short_description} featuredCategory="featured" />
                     })
                 }
-               
-                
+
+
             </ScrollView>
 
 
