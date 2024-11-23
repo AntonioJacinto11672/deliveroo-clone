@@ -5,6 +5,7 @@ import { sanityClientVerify, urlFor } from '@/sanity';
 import { ArrowLeftIcon, ChevronRightIcon, MapPinIcon, MinusCircleIcon, QuestionMarkCircleIcon, StarIcon } from 'react-native-heroicons/outline';
 import { DishType, RestaurantType } from '@/types/FeaturedTypes';
 import DishRow from '@/components/DishRow';
+import BasketIcon from '@/components/BasketIcon';
 
 const RestaurantScreen = () => {
     const [dishValue, setDishValue] = useState<DishType[]>([])
@@ -46,6 +47,8 @@ const RestaurantScreen = () => {
 
     return (
         <>
+        <BasketIcon />
+
             <ScrollView>
                 <View className='relative'>
                     <Image
@@ -82,7 +85,7 @@ const RestaurantScreen = () => {
                     </TouchableOpacity>
                 </View>
 
-                <View>
+                <View className='pb-36'>
                     <Text className='px-4 pt-6 mb-3 font-bold text-xl'>Menu</Text>
 
                     {dishValue && dishValue.map((dish) => {
@@ -97,6 +100,7 @@ const RestaurantScreen = () => {
                     })}
                 </View>
             </ScrollView>
+
         </>
     )
 }
