@@ -14,23 +14,23 @@ export interface RestaurantType {
     _id: string
     name: string
     short_description: string
-    image: Image
+    image: ImageType
     rating: number
     address: string
     lat: number
     long: number
     type: Type
-    dishes: Dish[]
+    dishes: DishType[]
     _rev: string
     _type: string
     _createdAt: string
     _updatedAt: string
 }
 
-export interface Dish {
+export interface DishType {
     _id: string
     name: string
-    image: Image
+    image: ImageType
     price: number
     short_description: string
     _type: string
@@ -40,7 +40,7 @@ export interface Dish {
     
 }
 
-export interface Image {
+export interface ImageType {
     asset: Asset
     _type: string
 }

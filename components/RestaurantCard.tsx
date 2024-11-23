@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { MapPinIcon, StarIcon } from 'react-native-heroicons/outline'
 import { urlFor } from '@/sanity'
+import { useNavigation } from 'expo-router'
+import { useRouter } from 'expo-router';
 
 interface RestaurantCardProps {
     id: string,
@@ -28,14 +30,36 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
     long,
     lat
 }) => {
+    const navigation = useNavigation()
+    const router = useRouter();
+
+
+
     return (
         <>
-            <TouchableOpacity className='bg-white  mr-3 shadow-sm '>
+            <TouchableOpacity className='bg-white  mr-3 shadow-sm'
+
+                onPress={() => router.push({
+                    pathname: '/RestaurantScreen',
+                    params:
+                    {
+                            id,
+                            imgUrl,
+                            title,
+                            rating,
+                            genre,
+                            address,
+                            short_description,
+                            long,
+                            lat
+                    }
+                })}
+            >
                 <Image
                     source={{
                         uri: urlFor(imgUrl).url()
                     }}
-                    className='h-36 w-64 rounded-sm'
+                    className='h-56 w-full rounded-sm'
                 />
                 <View className='px-3 pb-4'>
                     <Text className='font-bold text-lg pt-2'> {title} </Text>

@@ -18,7 +18,7 @@ const Categories = () => {
     useEffect(() => {
         sanityClientVerify.fetch(`*[_type == 'category'] {..., }`)
             .then((res) => {
-                console.log("Categories values ", res)
+                //console.log("Categories values ", res)
                 setCategories(res)
             })
     }, [])

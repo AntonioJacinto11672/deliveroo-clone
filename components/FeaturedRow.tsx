@@ -27,7 +27,7 @@ const FeaturedRow: React.FC<FeaturedRowProps> = ({ id, title, description, featu
   },
 }[0]
       `, { id }).then((res: FeaturedTpe) => {
-        console.log("Verificando o valor da imagem",res)
+       /*  console.log("Verificando o valor da imagem",res) */
             setRestaurantValues(res?.restaurants)
         }).catch((err) => console.log(err))
 

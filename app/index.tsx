@@ -75,7 +75,7 @@ const HomeScren = () => {
 
                 {
                     featuredCategories && featuredCategories.map((featuredCategory: FeaturedTpe) => {
-                        console.log("No Server", featuredCategory.name)
+                        //console.log("No Server", featuredCategory.name)
                         return <FeaturedRow id={featuredCategory._id} title={`${featuredCategory.name}`} description={featuredCategory.short_description} featuredCategory="featured" />
                     })
                 }
