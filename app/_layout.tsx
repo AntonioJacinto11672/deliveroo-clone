@@ -41,6 +41,12 @@ export default function RootLayout() {
           presentation: "modal",
           headerShown: false, title: "Basket"
         }} />
+        <Stack.Screen name="PreparingOrderScreen"  options={{
+          title: "Preparing", headerShown: false, presentation: "fullScreenModal"
+        }}/>
+         <Stack.Screen name="DeliveryScreen"  options={{
+          title: "Delivery", headerShown: false, presentation: "fullScreenModal"
+        }}/>
         <Stack.Screen name="+not-found" />
       </Stack>
     </Provider>

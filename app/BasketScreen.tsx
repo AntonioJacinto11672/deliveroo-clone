@@ -1,6 +1,6 @@
 import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useEffect, useMemo, useState } from 'react'
-import { useNavigation } from 'expo-router'
+import { useNavigation, useRouter } from 'expo-router'
 import { useAppDispatch, useAppSelector } from '@/hooks'
 import { selectRestaurants } from '@/features/restaurantSlice'
 import { removeFromBasket, selectBasketItems, selectBasketTotal } from '@/features/basketSlice'
@@ -10,6 +10,7 @@ import { FormatPrice } from '@/utils/FormPrice'
 
 const BasketScreen = () => {
   const navigation = useNavigation()
+  const router = useRouter()
   const restaurant = useAppSelector(selectRestaurants)
   const items = useAppSelector(selectBasketItems)
   const dispatch = useAppDispatch()
@@ -101,7 +102,7 @@ const BasketScreen = () => {
               <Text className='text-gray-400 font-extrabold'> {FormatPrice(basketTotal)} </Text>
             </View>
 
-            <TouchableOpacity className='rounded-lg bg-[#00CCBB] p-4'>
+            <TouchableOpacity className='rounded-lg bg-[#00CCBB] p-4' onPress={() => router.push('/PreparingOrderScreen')}>
               <Text className='text-center text-white text-lg font-bold'>Place Order</Text>
             </TouchableOpacity>
 
