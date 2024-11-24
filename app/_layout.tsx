@@ -37,6 +37,10 @@ export default function RootLayout() {
         <Stack.Screen name="RestaurantScreen" options={{
           headerShown: true, title: "Restaurant"
         }} />
+         <Stack.Screen name="BasketScreen" options={{
+          presentation: "modal",
+          headerShown: false, title: "Basket"
+        }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </Provider>

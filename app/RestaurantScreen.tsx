@@ -6,13 +6,17 @@ import { ArrowLeftIcon, ChevronRightIcon, MapPinIcon, MinusCircleIcon, QuestionM
 import { DishType, RestaurantType } from '@/types/FeaturedTypes';
 import DishRow from '@/components/DishRow';
 import BasketIcon from '@/components/BasketIcon';
+import { useAppDispatch } from '@/hooks';
+import { setRestaurant } from '@/features/restaurantSlice';
 
 const RestaurantScreen = () => {
     const [dishValue, setDishValue] = useState<DishType[]>([])
     const [restaurantValue, setrestaurantValue] = useState<RestaurantType[]>([])
-  
+
 
     const navigation = useNavigation()
+    const dispatch = useAppDispatch()
+
     const { id,
         imgUrl,
         title,
@@ -45,9 +49,17 @@ const RestaurantScreen = () => {
 
     }, [dishValue, restaurantValue])
 
+
+    useEffect(() => {
+        dispatch(setRestaurant({
+            ...restaurantValue
+        }))
+        //console.log("Hire Have a values",restaurantValue)
+
+    }, [dispatch])
     return (
         <>
-        <BasketIcon />
+            <BasketIcon />
 
             <ScrollView>
                 <View className='relative'>
@@ -55,7 +67,7 @@ const RestaurantScreen = () => {
                         source={{
                             uri: urlFor(imgUrl).url()
                         }}
-                        className='w-full h-56 bg-gray-300 p-4'
+                        className='w-full h-56 bg-gray-300 p-4 object-cover'
                     />
                     <TouchableOpacity onPress={navigation.goBack} className='absolute top-14 left-5 p-2 bg-gray-100 rounded-full'>
                         <ArrowLeftIcon size={20} color={"#00CCBB"} />
