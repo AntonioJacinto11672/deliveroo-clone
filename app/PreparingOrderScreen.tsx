@@ -12,7 +12,7 @@ const PreparingOrderScreen = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            router.push("/DeliveryScreen")
+            router.replace("/DeliveryScreen")
         }, 4000)
     }, [])
     return (
