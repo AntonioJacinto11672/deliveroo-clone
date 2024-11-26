@@ -23,7 +23,7 @@ const DeliveryScreen = () => {
     <View className='bg-[#00CCBB] flex-1'>
       <SafeAreaView className='z-50'>
         <View className='flex-row justify-between items-center p-5'>
-          <TouchableOpacity onPress={() => router.navigate("/")}>
+          <TouchableOpacity onPress={() => router.push("/")}>
             <XMarkIcon color={"white"} size={30} />
           </TouchableOpacity>
           <Text className='font-light text-white text-lg'>Order Help</Text>
@@ -51,7 +51,7 @@ const DeliveryScreen = () => {
       </SafeAreaView>
 
 
-      <MapView
+     {/*  <MapView
         initialRegion={{
           latitude: latitudeEstatic,
           longitude: longtudeEstatic,
@@ -72,7 +72,7 @@ const DeliveryScreen = () => {
           identifier='origin'
           pinColor='#00CCBB'
         />
-      </MapView>
+      </MapView> */}
 
       <SafeAreaView className='bg-white flex-row items-center space-x-5 h-28'>
         <Image

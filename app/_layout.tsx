@@ -31,22 +31,28 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <Stack>
+        <Stack.Screen name="LoginScreen" options={{
+          headerShown: false, title: "login"
+        }} />
+        <Stack.Screen name="RegisterScreen" options={{
+          headerShown: false, title: "Register"
+        }} />
         <Stack.Screen name="index" options={{
           headerShown: true, title: "Home"
         }} />
         <Stack.Screen name="RestaurantScreen" options={{
           headerShown: true, title: "Restaurant"
         }} />
-         <Stack.Screen name="BasketScreen" options={{
+        <Stack.Screen name="BasketScreen" options={{
           presentation: "modal",
           headerShown: false, title: "Basket"
         }} />
-        <Stack.Screen name="PreparingOrderScreen"  options={{
+        <Stack.Screen name="PreparingOrderScreen" options={{
           title: "Preparing", headerShown: false, presentation: "fullScreenModal"
-        }}/>
-         <Stack.Screen name="DeliveryScreen"  options={{
+        }} />
+        <Stack.Screen name="DeliveryScreen" options={{
           title: "Delivery", headerShown: false, presentation: "fullScreenModal"
-        }}/>
+        }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </Provider>
