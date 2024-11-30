@@ -26,17 +26,18 @@ const SlashScreen = () => {
     return <Redirect href={"/LoginScreen"} />
   }
   return (
-    <View className='flex-1 flex flex-col justify-center items-center '>
+    <View className='flex-1 flex flex-col justify-center items-center bg-gray-100'>
       <Image
-        source={require("@/assets/images/logo/NEtFarma.png")}
-        className='h-12 w-12 block object-contain'
-      />
-      <Text className='text-[#00CCBB] mt-5 font-medium text-xl w-1/2 text-center mb-5'>Get Stared</Text>
+            source={require("@/assets/images/logo/NEtFarma1.png")}
+
+            style={{ height: 500, width: 500 }}
+          />
+      <Text className='text-[#00665e] mt-5 font-medium text-xl w-1/2 text-center mb-5'>Get started</Text>
       <Progress.Bar 
       indeterminate={true}
       width={300}
       accessible
-      color='#00CCBB'
+      color='#00665e'
       />
     </View>
   )

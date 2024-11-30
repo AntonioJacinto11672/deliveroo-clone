@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import React from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { useAppSelector } from '@/hooks'
@@ -14,13 +14,13 @@ const DeliveryScreen = () => {
   const router = useRouter()
   const restaurant = useAppSelector(selectRestaurants)
 
-  const latitudeEstatic = 51.51923880936022
-  const longtudeEstatic = -0.13234916521933
+  const latitudeEstatic = -8.838333
+  const longtudeEstatic = 13.234444
 
 
   console.log("Hire void", restaurant)
   return (
-    <View className='bg-[#00CCBB] flex-1'>
+    <View className='bg-[#00CCBB]  flex-1'>
       <SafeAreaView className='z-50'>
         <View className='flex-row justify-between items-center p-5'>
           <TouchableOpacity onPress={() => router.push("/")}>
@@ -35,7 +35,6 @@ const DeliveryScreen = () => {
               <Text className='text-lg text-gray-400'>Estimate Arrival</Text>
               <Text className='text-4xl font-bold'>45-55 Minutes</Text>
             </View>
-
             <Image
               source={{
                 uri: "https://links.papareact.com/fls"
@@ -44,36 +43,36 @@ const DeliveryScreen = () => {
               className='h-20 w-20'
             />
           </View>
-
           <Progress.Bar indeterminate={true} color='#00CCBB' progress={0.4} />
           <Text className='mt-3 text-gray-500'>Your Order is being prepared</Text>
         </View>
       </SafeAreaView>
 
 
-     {/*  <MapView
+      <MapView
         initialRegion={{
-          latitude: latitudeEstatic,
-          longitude: longtudeEstatic,
+          latitude: -8.812002,
+          longitude: 13.237126,
           latitudeDelta: 0.005,
           longitudeDelta: 0.005,
         }}
-        className='flex-1 -mt-10 z-50 bg-white w-32 h-32'
+
+        className="flex-1 -mt-10 z-0"
+        style={styles.map}
         mapType='mutedStandard'
       >
         <Marker
           coordinate={{
-            latitude: -8.9176056,
-            longitude: 13.2098184
+            latitude: -8.812002,
+            longitude: 13.237126
           }}
 
-          title='CINFOTEC, 35MX+FRR, Belas'
-          description='Centro de formação cinfotec'
+          title='JAcinto House'
+          description='Está é a minha localização  '
           identifier='origin'
           pinColor='#00CCBB'
         />
-      </MapView> */}
-
+      </MapView>
       <SafeAreaView className='bg-white flex-row items-center space-x-5 h-28'>
         <Image
           source={{
@@ -87,10 +86,18 @@ const DeliveryScreen = () => {
           <Text className='text-gray-400'> Your Rider </Text>
         </View>
 
-        <Text className='text-[#00CCBB] text-lg ml-5 font-bold'>Call 2</Text>
+        <Text className='text-[#00CCBB] text-lg mr-5 font-bold'>Call 2</Text>
       </SafeAreaView>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  map: {
+    flex: 1,
+    marginTop: -48,
+    zIndex: 0
+  },
+});
 
 export default DeliveryScreen

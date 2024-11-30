@@ -1,11 +1,10 @@
-import { View, Text, TouchableOpacity, Image, Touchable } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Touchable, TextInput } from 'react-native'
 import React from 'react'
 
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ArrowLeftIcon } from 'react-native-heroicons/solid'
 import { useNavigationBuilder } from '@react-navigation/native'
 import { useNavigation, useRouter } from 'expo-router'
-import { TextInput } from 'react-native-gesture-handler'
 
 const RegisterScreen = () => {
   const navigation = useNavigation()

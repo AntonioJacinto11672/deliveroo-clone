@@ -38,15 +38,12 @@ export default function RootLayout() {
           headerShown: false, title: "Register"
         }} />
         <Stack.Screen name="index" options={{
-          headerShown: true, title: "Home"
+          headerShown: true, title: "Home", presentation: "fullScreenModal"
         }} />
         <Stack.Screen name="RestaurantScreen" options={{
           headerShown: true, title: "Restaurant"
         }} />
-        <Stack.Screen name="BasketScreen" options={{
-          presentation: "modal",
-          headerShown: false, title: "Basket"
-        }} />
+       
         <Stack.Screen name="PreparingOrderScreen" options={{
           title: "Preparing", headerShown: false, presentation: "fullScreenModal"
         }} />
@@ -54,6 +51,9 @@ export default function RootLayout() {
           title: "Delivery", headerShown: false, presentation: "fullScreenModal"
         }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="BasketScreen" options={{
+          headerShown: false, title: "Basket"
+        }} />
       </Stack>
     </Provider>
   );
